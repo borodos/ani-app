@@ -1,0 +1,13 @@
+.wrapper {
+	width: 100%;
+	height: 30rem;
+	background-color: aqua;
+	display: flex;
+}
+
+.person-img {
+	width: 50%;
+	height: 500px;
+	background-image: url(../../img/Photo-1.png);
+	background-size: cover;
+}

@@ -1,0 +1,8 @@
+.link {
+	color: rgb(44, 122, 123);
+}
+
+.link:hover {
+	color: rgb(25, 74, 75);
+	border-bottom: 1px solid rgb(25, 74, 75);
+}
