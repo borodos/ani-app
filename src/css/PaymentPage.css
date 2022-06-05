@@ -1,0 +1,76 @@
+.wrapper-payment-page {
+	height: 100vh;
+}
+
+.card-payment {
+	width: 100%;
+	max-width: 700px;
+}
+
+.size-payment {
+	color: rgb(165, 164, 164);
+	overflow: hidden;
+	text-align: center;
+	font-size: 30;
+	text-transform: uppercase;
+}
+
+.size-payment span {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.size-payment::before,
+.size-payment::after {
+	content: "";
+	display: inline-block;
+	vertical-align: middle;
+	width: 100%;
+	height: 1px;
+	background-color: rgb(165, 164, 164);
+	position: relative;
+}
+
+.size-payment::before {
+	margin-left: -100%;
+	left: -14px;
+}
+
+.size-payment::after {
+	margin-right: -100%;
+	right: -14px;
+}
+
+.data-info {
+	color: rgb(165, 164, 164);
+	overflow: hidden;
+	text-align: center;
+	font-size: 30;
+	text-transform: uppercase;
+}
+
+.data-info span {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.data-info::before,
+.data-info::after {
+	content: "";
+	display: inline-block;
+	vertical-align: middle;
+	width: 100%;
+	height: 1px;
+	background-color: rgb(165, 164, 164);
+	position: relative;
+}
+
+.data-info::before {
+	margin-left: -100%;
+	left: -14px;
+}
+
+.data-info::after {
+	margin-right: -100%;
+	right: -14px;
+}

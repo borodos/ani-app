@@ -1,0 +1,23 @@
+.footer {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.footer-container {
+	width: 75%;
+	border-radius: 5px;
+	margin: auto;
+}
+
+.footer-info {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.footer-nav {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}

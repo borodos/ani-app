@@ -1,26 +1,17 @@
 import { makeAutoObservable } from "mobx";
 
-export default class UserStroe {
+export default class NeededsStore {
 	constructor() {
-		this._isAuth = false;
-		this._user = {};
+		this._neededs = [];
 		// -- Заставляем класс следить за измененями. Если изменение произошло, класс говорить функциями, у которых есть observer, что произошло изменение, и функция перерендеривается
 		makeAutoObservable(this);
 	}
 
-	setIsAuth(bool) {
-		this._isAuth = bool;
+	setNeedes(neededs) {
+		this._neededs = neededs;
 	}
 
-	setUser(user) {
-		this._user = user;
-	}
-
-	get isAuth() {
-		return this._isAuth;
-	}
-
-	get user() {
-		return this._user;
+	get neededs() {
+		return this._neededs;
 	}
 }

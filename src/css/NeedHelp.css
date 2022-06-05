@@ -1,0 +1,34 @@
+.wrapper-need-help {
+	width: 100%;
+	margin-top: 50px;
+}
+
+.carousel-need-help {
+	width: 100%;
+	height: 30rem;
+	display: flex;
+	background-color: rgb(247, 247, 247);
+	border-radius: 5px;
+}
+
+.img-person {
+	border: 5px solid rgb(7, 238, 18);
+}
+
+.card-person {
+	width: 30%;
+	height: 90%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 5px;
+	box-shadow: 0px 0px 5px teal;
+}
+
+.person-img {
+	display: block;
+	width: 50%;
+	height: 100%;
+	background-image: url(../../img/Photo-1.png);
+	background-size: cover;
+}
