@@ -1,20 +1,7 @@
 import { $authHost, $host } from ".";
 
-export const createNeeded = async (
-	firstName,
-	secondName,
-	totalSum,
-	remainSum,
-	file
-) => {
-	const { data } = await $authHost.post("api/needed/create", {
-		// -- Первый параметр - URL запроса, второй параметр - тело запроса
-		firstName,
-		secondName,
-		totalSum,
-		remainSum,
-		file,
-	});
+export const createNeeded = async (formData) => {
+	const { data } = await $authHost.post("api/needed/create", formData);
 	return data;
 };
 

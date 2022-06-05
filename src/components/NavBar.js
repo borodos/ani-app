@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 
 import { Button, useDisclosure } from "@chakra-ui/react";
 import { Container, Nav, Navbar } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "../css/NavBar.css";
 import * as Scroll from "react-scroll";
 import { Context } from "..";
@@ -10,8 +10,11 @@ import { CreateModal } from "./CreateModal";
 
 export const NavBar = () => {
 	const navigate = useNavigate();
+	const location = useLocation();
 	const { userStore } = useContext(Context);
 	const [visible, setVisible] = useState(false);
+
+	console.log(location);
 
 	return (
 		<div>

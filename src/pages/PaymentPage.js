@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
 	Box,
@@ -20,6 +20,7 @@ import { Formik, Field, Form, useFormik } from "formik";
 import { ButtonGroup, Card, Container, ToggleButton } from "react-bootstrap";
 import { RadioCard } from "../components/RadioCard";
 import "../css/PaymentPage.css";
+import { getNeededs } from "../http/neededApi";
 
 export const PaymentPage = () => {
 	let error = false;
@@ -54,8 +55,16 @@ export const PaymentPage = () => {
 		},
 	});
 
+	const [neededs, setNeededs] = useState([]);
+
+	useEffect(() => {
+		getNeededs().then((data) => {
+			setNeededs(data);
+		});
+	}, []);
+
 	return (
-		<Container className="d-flex justify-content-center align-items-center flex-grow-1 wrapper-payment-page">
+		<Container className="d-flex justify-content-center align-items-center flex-grow-1 mt-5 mb-5 wrapper-payment-page">
 			<Card className="card-payment">
 				<Card.Body>
 					<Heading as="h3" size="xl" color="blue.300">
@@ -122,9 +131,14 @@ export const PaymentPage = () => {
 								onChange={formik.handleChange}
 								value={formik.values.recipient}
 							>
-								<option value="Василиса Соколова">Василиса Соколова</option>
-								<option value="option2">Option 2</option>
-								<option value="option3">Option 3</option>
+								{neededs.map((value, index, array) => (
+									<option
+										key={`${value}-${index}`}
+										value={`${value.firstName} ${value.secondName}`}
+									>
+										{value.firstName} {value.secondName}
+									</option>
+								))}
 							</Select>
 						</FormControl>
 

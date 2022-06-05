@@ -24,17 +24,6 @@ export const CreateModal = ({ isOpen, onClose }) => {
 	const [file, setFile] = useState();
 	const [image, setImage] = useState();
 
-	const selectFile = (event) => {
-		setFile(event.target.files[0]);
-		const reader = new FileReader();
-		reader.onload = () => {
-			if (reader.readyState === 2) {
-				setImage(reader.result);
-			}
-		};
-		reader.readAsDataURL(event.target.files[0]);
-	};
-
 	return (
 		<>
 			<Modal blockScrollOnMount={true} isOpen={isOpen} onClose={onClose}>
@@ -47,18 +36,22 @@ export const CreateModal = ({ isOpen, onClose }) => {
 							initialValues={{
 								firstName: "",
 								secondName: "",
+								age: "",
+								place: "",
 								totalSum: "",
 								remainSum: "",
 							}}
 							onSubmit={async (values, actions) => {
 								try {
-									// let data = await createNeeded(
-									// 	values.firstName,
-									// 	values.secondName,
-									// 	values.totalSum,
-									// 	values.remainSum,
-									// );
-
+									const formData = new FormData();
+									formData.append("firstName", values.firstName);
+									formData.append("secondName", values.secondName);
+									formData.append("age", values.age);
+									formData.append("place", values.place);
+									formData.append("totalSum", values.totalSum);
+									formData.append("remainSum", values.remainSum);
+									formData.append("img", file);
+									let data = await createNeeded(formData);
 									toast({
 										title: "Добавлено.",
 										status: "success",
@@ -66,6 +59,7 @@ export const CreateModal = ({ isOpen, onClose }) => {
 										duration: 2000,
 										position: "bottom-left",
 									});
+									actions.resetForm();
 								} catch (error) {
 									alert(error.response.data.message);
 								}
@@ -101,6 +95,34 @@ export const CreateModal = ({ isOpen, onClose }) => {
 												<FormErrorMessage>
 													{form.errors.secondName}
 												</FormErrorMessage>
+											</FormControl>
+										)}
+									</Field>
+
+									<Field name="age">
+										{({ field, form }) => (
+											<FormControl isRequired className="mt-2">
+												<FormLabel htmlFor="age">Возраст</FormLabel>
+												<Input
+													{...field}
+													id="age"
+													placeholder="Введите возраст"
+												/>
+												<FormErrorMessage>{form.errors.age}</FormErrorMessage>
+											</FormControl>
+										)}
+									</Field>
+
+									<Field name="place">
+										{({ field, form }) => (
+											<FormControl isRequired className="mt-2">
+												<FormLabel htmlFor="place">Место проживания</FormLabel>
+												<Input
+													{...field}
+													id="place"
+													placeholder="Введите город"
+												/>
+												<FormErrorMessage>{form.errors.place}</FormErrorMessage>
 											</FormControl>
 										)}
 									</Field>
@@ -141,24 +163,15 @@ export const CreateModal = ({ isOpen, onClose }) => {
 										)}
 									</Field>
 
-									<Field name="file" type="file">
-										{({ field, form }) => (
-											<FormControl
-												isRequired
-												className="mt-2"
-												onChange={selectFile}
-											>
-												<FormLabel htmlFor="img">Фотография</FormLabel>
-												<Input
-													{...field}
-													id="file"
-													type="file"
-													placeholder="Загрузите фото"
-												/>
-												<FormErrorMessage>{form.errors.img}</FormErrorMessage>
-											</FormControl>
-										)}
-									</Field>
+									<Input
+										mt={4}
+										name="img"
+										id="img"
+										type="file"
+										onChange={(e) => {
+											setFile(e.target.files[0]);
+										}}
+									/>
 
 									<Button
 										mt={4}

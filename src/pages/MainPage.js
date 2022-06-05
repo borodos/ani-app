@@ -8,7 +8,7 @@ import "../css/MainPage.css";
 
 export const MainPage = () => {
 	return (
-		<Container className="d-flex justify-content-center flex-column align-items-center flex-grow-1 mt-5">
+		<Container className="d-flex justify-content-center flex-column align-items-center flex-grow-1 mt-5 mb-5">
 			<CardHeroes />
 			<NeedHelp />
 			<HowToHelp />

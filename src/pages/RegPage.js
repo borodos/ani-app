@@ -58,7 +58,7 @@ export const RegPage = () => {
 	const toast = useToast();
 
 	return (
-		<Container className="d-flex justify-content-center align-items-center flex-grow-1 mt-5">
+		<Container className="d-flex justify-content-center align-items-center flex-grow-1 mt-5 mb-5">
 			<Card className="p-4 w-50">
 				<Card.Title className="border-bottom p-2">Регистрация</Card.Title>
 				<Formik
