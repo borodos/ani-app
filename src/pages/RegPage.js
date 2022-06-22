@@ -80,7 +80,7 @@ export const RegPage = () => {
 							userStore.setIsAuth(true);
 							navigate("/");
 							toast({
-								title: "Вы успешно зарегистрировались.",
+								title: "Вы успешно зарегистрировались",
 								status: "success",
 								isClosable: false,
 								duration: 2000,

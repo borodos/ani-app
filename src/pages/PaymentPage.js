@@ -3,12 +3,15 @@ import React, { useEffect, useState } from "react";
 import {
 	Box,
 	Button,
+	Checkbox,
 	FormHelperText,
 	Heading,
 	HStack,
+	Link,
 	Select,
 	useRadio,
 	useRadioGroup,
+	useToast,
 } from "@chakra-ui/react";
 import {
 	FormControl,
@@ -21,27 +24,34 @@ import { ButtonGroup, Card, Container, ToggleButton } from "react-bootstrap";
 import { RadioCard } from "../components/RadioCard";
 import "../css/PaymentPage.css";
 import { getNeededs } from "../http/neededApi";
+import { pay } from "../http/paymentApi";
+import { useNavigate } from "react-router-dom";
 
 export const PaymentPage = () => {
-	let error = false;
-	const validateEmail = (value) => {
-		const regex =
-			/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-
-		if (!regex.test(value)) {
-			error = true;
-		}
-	};
+	const toast = useToast();
+	const [neededs, setNeededs] = useState([]);
+	const navigate = useNavigate();
 
 	const formik = useFormik({
 		initialValues: {
 			sum: "",
-			recipient: "",
+			recipientInfo: "",
 			senderEmail: "",
 			senderInfo: "",
 		},
 		onSubmit: (values) => {
-			alert(JSON.stringify(values, null, 2));
+			pay(values).then((value) => {
+				toast({
+					title: "Оплата успешно пройдена",
+					status: "success",
+					isClosable: false,
+					duration: 2000,
+					position: "bottom-left",
+				});
+				setTimeout(() => {
+					navigate("/");
+				}, 1000);
+			});
 		},
 	});
 
@@ -54,8 +64,6 @@ export const PaymentPage = () => {
 			formik.values.sum = value;
 		},
 	});
-
-	const [neededs, setNeededs] = useState([]);
 
 	useEffect(() => {
 		getNeededs().then((data) => {
@@ -70,7 +78,7 @@ export const PaymentPage = () => {
 					<Heading as="h3" size="xl" color="blue.300">
 						Online перевод
 					</Heading>
-					<div className="d-flex justify-content-center m-4">
+					{/* <div className="d-flex justify-content-center m-4">
 						<Button
 							colorScheme="teal"
 							variant="outline"
@@ -88,7 +96,7 @@ export const PaymentPage = () => {
 						>
 							Разово
 						</Button>
-					</div>
+					</div> */}
 
 					<div className="w-100 m-4 ms-0">
 						<strong>
@@ -117,6 +125,7 @@ export const PaymentPage = () => {
 							<FormLabel htmlFor="sum">Другая сумма, &#8381;</FormLabel>
 							<Input
 								id="sum"
+								type="number"
 								placeholder="Введите сумму"
 								onChange={formik.handleChange}
 								value={formik.values.sum}
@@ -124,12 +133,12 @@ export const PaymentPage = () => {
 						</FormControl>
 
 						<FormControl isRequired className="mt-2">
-							<FormLabel htmlFor="recipient">Выберите получателя</FormLabel>
+							<FormLabel htmlFor="recipientInfo">Выберите получателя</FormLabel>
 							<Select
-								id="recipient"
+								id="recipientInfo"
 								placeholder="Выберите получателя"
 								onChange={formik.handleChange}
-								value={formik.values.recipient}
+								value={formik.values.recipientInfo}
 							>
 								{neededs.map((value, index, array) => (
 									<option
@@ -167,6 +176,16 @@ export const PaymentPage = () => {
 								value={formik.values.senderInfo}
 							/>
 						</FormControl>
+
+						<div className="d-flex flex-column">
+							<Checkbox mt={4} mb={4} colorScheme="green" isRequired>
+								Соглашаюсь с <Link color="blue.300">офертой</Link> и обработкой
+								моих персональных данных
+							</Checkbox>
+							<Checkbox colorScheme="green">
+								Я хочу получать новости от Фонда
+							</Checkbox>
+						</div>
 
 						<Button mt={4} colorScheme="teal" type="submit">
 							Отправить

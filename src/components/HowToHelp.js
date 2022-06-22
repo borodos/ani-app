@@ -1,8 +1,10 @@
 import React from "react";
 import { Button, Heading, Image, Text } from "@chakra-ui/react";
 import "../css/HowToHelp.css";
+import { useNavigate } from "react-router-dom";
 
 export const HowToHelp = () => {
+	const navigate = useNavigate();
 	return (
 		<div className="wrapper-how-to-help">
 			<Heading as="h2" size="xl" className="mb-4" color="blue.300">
@@ -31,7 +33,7 @@ export const HowToHelp = () => {
 						</Text>
 					</div>
 				</div>
-				<Button mt={4} colorScheme="teal" type="submit">
+				<Button mt={4} colorScheme="teal" onClick={() => navigate("/payment")}>
 					Выбрать цель пожертвования
 				</Button>
 			</div>

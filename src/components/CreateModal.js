@@ -12,17 +12,18 @@ import {
 	FormHelperText,
 	Input,
 	useToast,
+	Textarea,
 } from "@chakra-ui/react";
 import { Field, Form, Formik } from "formik";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createNeeded } from "../http/neededApi";
+import { Context } from "..";
+import { observer } from "mobx-react-lite";
 
 export const CreateModal = ({ isOpen, onClose }) => {
 	const toast = useToast();
-	const navigate = useNavigate();
 	const [file, setFile] = useState();
-	const [image, setImage] = useState();
 
 	return (
 		<>
@@ -39,7 +40,7 @@ export const CreateModal = ({ isOpen, onClose }) => {
 								age: "",
 								place: "",
 								totalSum: "",
-								remainSum: "",
+								neededInfo: "",
 							}}
 							onSubmit={async (values, actions) => {
 								try {
@@ -49,16 +50,19 @@ export const CreateModal = ({ isOpen, onClose }) => {
 									formData.append("age", values.age);
 									formData.append("place", values.place);
 									formData.append("totalSum", values.totalSum);
-									formData.append("remainSum", values.remainSum);
+									formData.append("neededInfo", values.neededInfo);
 									formData.append("img", file);
 									let data = await createNeeded(formData);
 									toast({
-										title: "Добавлено.",
+										title: "Добавлено",
 										status: "success",
 										isClosable: false,
 										duration: 2000,
 										position: "bottom-left",
 									});
+									setTimeout(() => {
+										window.location.reload();
+									}, 1000);
 									actions.resetForm();
 								} catch (error) {
 									alert(error.response.data.message);
@@ -106,6 +110,7 @@ export const CreateModal = ({ isOpen, onClose }) => {
 												<Input
 													{...field}
 													id="age"
+													type="number"
 													placeholder="Введите возраст"
 												/>
 												<FormErrorMessage>{form.errors.age}</FormErrorMessage>
@@ -136,6 +141,7 @@ export const CreateModal = ({ isOpen, onClose }) => {
 												<Input
 													{...field}
 													id="totalSum"
+													type="number"
 													placeholder="Введите сумму"
 												/>
 												<FormErrorMessage>
@@ -145,19 +151,24 @@ export const CreateModal = ({ isOpen, onClose }) => {
 										)}
 									</Field>
 
-									<Field name="remainSum">
+									<Field name="neededInfo">
 										{({ field, form }) => (
 											<FormControl isRequired className="mt-2">
-												<FormLabel htmlFor="remainSum">
-													Сколько осталось собрать
+												<FormLabel htmlFor="neededInfo">
+													Информация о человеке
 												</FormLabel>
-												<Input
+												{/* <Input
 													{...field}
-													id="remainSum"
+													id="neededInfo"
 													placeholder="Введите сумму"
+												/> */}
+												<Textarea
+													{...field}
+													id="neededInfo"
+													placeholder="Введите информацию"
 												/>
 												<FormErrorMessage>
-													{form.errors.remainSum}
+													{form.errors.neededInfo}
 												</FormErrorMessage>
 											</FormControl>
 										)}

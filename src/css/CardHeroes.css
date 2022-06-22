@@ -6,6 +6,10 @@
 	box-shadow: 0px 0px 15px rgb(131, 131, 131);
 }
 
+.card-main {
+	margin-top: 25%;
+}
+
 .card-heroes {
 	width: 100%;
 	height: 100%;
@@ -15,10 +19,35 @@
 	border-radius: 0px;
 }
 
-.person-img {
-	display: block;
+.person-img-1 {
 	width: 50%;
 	height: 100%;
-	background-image: url(../../img/Photo-1.png);
-	background-size: cover;
+}
+
+.person-img-1 img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.person-img-2 {
+	width: 50%;
+	height: 100%;
+}
+
+.person-img-2 img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.person-img-3 {
+	width: 50%;
+	height: 100%;
+}
+
+.person-img-3 img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
 }

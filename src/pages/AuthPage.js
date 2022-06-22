@@ -54,7 +54,7 @@ export const AuthPage = () => {
 							userStore.setIsAuth(true);
 							navigate("/");
 							toast({
-								title: "Вы успешно вошли.",
+								title: "Вы успешно вошли",
 								status: "success",
 								isClosable: false,
 								duration: 2000,

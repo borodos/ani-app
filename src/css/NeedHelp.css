@@ -3,21 +3,61 @@
 	margin-top: 50px;
 }
 
-.carousel-need-help {
+.container-need-help {
 	width: 100%;
-	height: 30rem;
+	height: 500px;
+	margin-top: 50px;
+	padding: 15px;
 	display: flex;
 	background-color: rgb(247, 247, 247);
 	border-radius: 5px;
+	align-items: center;
+	overflow-x: scroll;
+}
+
+.container-need-help::-webkit-scrollbar {
+	width: 24px;
+	height: 8px;
+	background-color: rgb(247, 247, 247);
+}
+
+.container-need-help::-webkit-scrollbar-thumb {
+	background-color: #843465;
+	border-radius: 9em;
+}
+
+.container-need-help::-webkit-scrollbar-thumb:hover {
+	background-color: #d6d6d6;
+}
+
+.needed-info {
+	width: 250px;
+	max-height: 40px;
+	overflow-y: scroll;
+}
+
+.needed-info::-webkit-scrollbar {
+	width: 5px;
+	background-color: rgb(247, 247, 247);
+}
+
+.needed-info::-webkit-scrollbar-thumb {
+	background-color: #843465;
+	border-radius: 9em;
+}
+
+.needed-info::-webkit-scrollbar-thumb:hover {
+	background-color: #d6d6d6;
 }
 
 .img-person {
+	margin-bottom: 15px;
 	border: 5px solid rgb(7, 238, 18);
 }
 
 .card-person {
-	width: 30%;
-	height: 90%;
+	min-width: 330px;
+	height: 450px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -25,10 +65,7 @@
 	box-shadow: 0px 0px 5px teal;
 }
 
-.person-img {
-	display: block;
-	width: 50%;
-	height: 100%;
-	background-image: url(../../img/Photo-1.png);
-	background-size: cover;
+.card-person {
+	margin-left: 50px;
+	margin-right: 50px;
 }

@@ -7,7 +7,7 @@ export default class NeededsStore {
 		makeAutoObservable(this);
 	}
 
-	setNeedes(neededs) {
+	setNeededs(neededs) {
 		this._neededs = neededs;
 	}
 

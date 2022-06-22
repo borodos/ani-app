@@ -14,8 +14,6 @@ export const NavBar = () => {
 	const { userStore } = useContext(Context);
 	const [visible, setVisible] = useState(false);
 
-	console.log(location);
-
 	return (
 		<div>
 			<Navbar bg="light" variant="light">

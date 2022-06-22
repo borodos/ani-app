@@ -10,9 +10,11 @@ import { Context } from ".";
 import { check } from "./http/userApi";
 import { Spinner } from "react-bootstrap";
 import { getNeededs } from "./http/neededApi";
+import { observer } from "mobx-react-lite";
 
-function App() {
+export const App = () => {
 	const { userStore } = useContext(Context);
+
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
@@ -23,12 +25,6 @@ function App() {
 			})
 			.finally(() => setLoading(false));
 	}, [userStore]);
-
-	useEffect(() => {
-		getNeededs().then((data) => {
-			console.log(data);
-		});
-	}, []);
 
 	if (loading) {
 		return (
@@ -54,6 +50,4 @@ function App() {
 			</ChakraProvider>
 		</div>
 	);
-}
-
-export default App;
+};
